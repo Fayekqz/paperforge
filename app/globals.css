@@ -1,26 +1,117 @@
 @import "tailwindcss";
 
+@theme {
+  --font-sans: var(--font-chrome-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-serif: var(--font-paper-serif), "Lora", Georgia, Cambria, "Times New Roman", serif;
+
+  --color-ink: #181716;
+  --color-ink-secondary: #47433E;
+  --color-ink-muted: #6B655D;
+  --color-ink-faint: #9A9388;
+  --color-ink-border: #DCD6CA;
+
+  --color-chrome: #F5F3ED;
+  --color-chrome-card: #FFFFFF;
+  --color-chrome-border: #DDD8CD;
+
+  --color-paper: #FAF8F3;
+  --color-paper-edge: #EAE4D6;
+  --color-paper-rule: #D5CEBE;
+  --color-paper-ink: #141312;
+
+  --color-oxblood: #80182A;
+  --color-oxblood-dark: #63111E;
+  --color-oxblood-light: #FBF0F2;
+  --color-oxblood-border: #F1CCD3;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --font-chrome: var(--font-chrome-sans);
+  --font-paper: var(--font-paper-serif);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Custom scrollbars for control rail */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #F0ECE4;
+}
+::-webkit-scrollbar-thumb {
+  background: #CDC6B8;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #AFA798;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Academic paper styling */
+.font-paper {
+  font-family: var(--font-paper-serif), 'Lora', Georgia, serif;
+}
+
+.font-chrome {
+  font-family: var(--font-chrome-sans), sans-serif;
+}
+
+/* Print Stylesheet */
+@media print {
+  @page {
+    margin: 18mm 20mm;
+    size: A4 portrait;
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  body {
+    background: #FFFFFF !important;
+    color: #000000 !important;
+    font-family: 'Lora', Georgia, 'Times New Roman', serif !important;
+    font-size: 10.5pt !important;
+    line-height: 1.5 !important;
+  }
+
+  /* Hide all non-paper UI elements */
+  .no-print,
+  nav,
+  header,
+  aside,
+  .control-rail,
+  .warnings-banner,
+  .swap-button,
+  .breakdown-toggle,
+  .action-toolbar,
+  button:not(.print-include) {
+    display: none !important;
+  }
+
+  /* Reset exam sheet to plain white printable sheet */
+  .exam-sheet-container {
+    padding: 0 !important;
+    margin: 0 !important;
+    background: transparent !important;
+  }
+
+  .exam-sheet {
+    background: #FFFFFF !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    color: #000000 !important;
+  }
+
+  .exam-sheet * {
+    color: #000000 !important;
+  }
+
+  .page-break-avoid {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .section-break-before {
+    page-break-before: auto;
+  }
 }
