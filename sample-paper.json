@@ -71,7 +71,7 @@
         }
       ],
       "correctOption": "A",
-      "markingGuide": "Expand to 3x - 6 < 2x + 5 => x < 11."
+      "markingGuide": "Expand to 3x - 6 < 2x + 5  implies  x < 11."
     },
     {
       "id": "geom_11",
@@ -100,7 +100,7 @@
         }
       ],
       "correctOption": "C",
-      "markingGuide": "Pythagorean theorem: h = sqrt(13^2 - 5^2) = sqrt(169 - 25) = sqrt(144) = 12 m."
+      "markingGuide": "Pythagorean theorem: h = sqrt{} = sqrt{} = sqrt{} = 12 m."
     },
     {
       "id": "phy_12",
@@ -276,7 +276,7 @@
       "type": "Short Answer",
       "marks": 3,
       "text": "A railway truck of mass $1200\\text{ kg}$ travelling at $4.0\\text{ m/s}$ collides and couples with a stationary truck of mass $800\\text{ kg}$. Calculate the common velocity of the coupled trucks immediately following impact.",
-      "markingGuide": "Total momentum before = total momentum after. (1200)(4.0) + (800)(0) = (1200 + 800)v => 4800 = 2000v => v = 2.4 m/s."
+      "markingGuide": "Total momentum before = total momentum after. (1200)(4.0) + (800)(0) = (1200 + 800)v  implies  4800 = 2000v  implies  v = 2.4 m/s."
     },
     {
       "id": "geom_08",
@@ -335,7 +335,7 @@
           "marks": 2
         }
       ],
-      "markingGuide": "(a) R = sqrt(3^2 + 4^2) = 5. tan(alpha) = 4/3 => alpha = 0.927 rad (or 53.13 deg). f(theta) = 5sin(theta + 0.927). (b) Maximum = 5. Occurs when theta + 0.927 = pi/2 = 1.571 => theta = 0.644 rad (36.87 deg)."
+      "markingGuide": "(a) R = sqrt{} = 5. tan(alpha) = 4/3  implies  alpha = 0.927 rad (or 53.13 deg). f(theta) = 5sin(theta + 0.927). (b) Maximum = 5. Occurs when theta + 0.927 = pi/2 = 1.571  implies  theta = 0.644 rad (36.87 deg)."
     }
   ],
   "breakdown": {

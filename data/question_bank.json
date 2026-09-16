@@ -8,10 +8,22 @@
     "marks": 1,
     "text": "What are the roots of the quadratic equation $x^2 - 7x + 12 = 0$?",
     "options": [
-      { "key": "A", "text": "x = -3 and x = -4" },
-      { "key": "B", "text": "x = 3 and x = 4" },
-      { "key": "C", "text": "x = 2 and x = 6" },
-      { "key": "D", "text": "x = -2 and x = -6" }
+      {
+        "key": "A",
+        "text": "x = -3 and x = -4"
+      },
+      {
+        "key": "B",
+        "text": "x = 3 and x = 4"
+      },
+      {
+        "key": "C",
+        "text": "x = 2 and x = 6"
+      },
+      {
+        "key": "D",
+        "text": "x = -2 and x = -6"
+      }
     ],
     "correctOption": "B",
     "markingGuide": "Factorize into (x - 3)(x - 4) = 0."
@@ -25,13 +37,25 @@
     "marks": 1,
     "text": "Which inequality represents the solution set for $3(x - 2) < 2x + 5$?",
     "options": [
-      { "key": "A", "text": "x < 11" },
-      { "key": "B", "text": "x > 11" },
-      { "key": "C", "text": "x < -1" },
-      { "key": "D", "text": "x > -1" }
+      {
+        "key": "A",
+        "text": "x < 11"
+      },
+      {
+        "key": "B",
+        "text": "x > 11"
+      },
+      {
+        "key": "C",
+        "text": "x < -1"
+      },
+      {
+        "key": "D",
+        "text": "x > -1"
+      }
     ],
     "correctOption": "A",
-    "markingGuide": "Expand to 3x - 6 < 2x + 5 => x < 11."
+    "markingGuide": "Expand to 3x - 6 < 2x + 5  implies  x < 11."
   },
   {
     "id": "alg_03",
@@ -41,7 +65,7 @@
     "type": "Short Answer",
     "marks": 2,
     "text": "Find the 15th term of the arithmetic progression: $4, 9, 14, 19, \\dots$",
-    "markingGuide": "a = 4, d = 5. T_15 = a + 14d = 4 + 14(5) = 74."
+    "markingGuide": "a = 4, d = 5. _{} = a + 14d = 4 + 14(5) = 74."
   },
   {
     "id": "alg_04",
@@ -51,7 +75,7 @@
     "type": "Short Answer",
     "marks": 3,
     "text": "Solve the pair of simultaneous linear equations algebraically:\n$$2x + 3y = 13$$\n$$5x - 2y = 4$$",
-    "markingGuide": "Multiply (1) by 2 and (2) by 3: 4x + 6y = 26 and 15x - 6y = 12. Add: 19x = 38 => x = 2. Substitute to obtain y = 3."
+    "markingGuide": "Multiply (1) by 2 and (2) by 3: 4x + 6y = 26 and 15x - 6y = 12. Add: 19x = 38  implies  x = 2. Substitute to obtain y = 3."
   },
   {
     "id": "alg_05",
@@ -61,7 +85,7 @@
     "type": "Short Answer",
     "marks": 3,
     "text": "When the polynomial $P(x) = 2x^3 + ax^2 - 11x + b$ is divided by $(x - 2)$, the remainder is 0, and when divided by $(x + 1)$, the remainder is 18. Determine the values of constants $a$ and $b$.",
-    "markingGuide": "P(2) = 0 => 16 + 4a - 22 + b = 0 => 4a + b = 6. P(-1) = 18 => -2 + a + 11 + b = 18 => a + b = 9. Solving gives a = -1, b = 10."
+    "markingGuide": "P(2) = 0  implies  16 + 4a - 22 + b = 0  implies  4a + b = 6. P(-1) = 18  implies  -2 + a + 11 + b = 18  implies  a + b = 9. Solving gives a = -1, b = 10."
   },
   {
     "id": "alg_06",
@@ -72,13 +96,25 @@
     "marks": 2,
     "text": "The sum of the first $n$ terms of a sequence is given by $S_n = 3n^2 + 5n$. What is the 8th term of this sequence?",
     "options": [
-      { "key": "A", "text": "47" },
-      { "key": "B", "text": "50" },
-      { "key": "C", "text": "52" },
-      { "key": "D", "text": "232" }
+      {
+        "key": "A",
+        "text": "47"
+      },
+      {
+        "key": "B",
+        "text": "50"
+      },
+      {
+        "key": "C",
+        "text": "52"
+      },
+      {
+        "key": "D",
+        "text": "232"
+      }
     ],
     "correctOption": "B",
-    "markingGuide": "T_8 = S_8 - S_7 = (3(64) + 40) - (3(49) + 35) = 232 - 182 = 50."
+    "markingGuide": "_{} = _{} - _{} = (3(64) + 40) - (3(49) + 35) = 232 - 182 = 50."
   },
   {
     "id": "alg_07",
@@ -89,9 +125,21 @@
     "marks": 6,
     "text": "A manufacturing firm produces precision optical lenses. The daily cost function in dollars is modeled by $C(x) = 2x^2 - 80x + 1200$, where $x$ represents the number of lenses manufactured per day.",
     "subparts": [
-      { "label": "(a)", "text": "By completing the square or differentiation, determine the number of lenses that minimizes daily production costs.", "marks": 2 },
-      { "label": "(b)", "text": "State the minimum daily cost incurred by the firm.", "marks": 1 },
-      { "label": "(c)", "text": "If each lens sells for a fixed price of $60, establish the profit function $P(x)$ and determine the production range for which the operation is strictly profitable.", "marks": 3 }
+      {
+        "label": "(a)",
+        "text": "By completing the square or differentiation, determine the number of lenses that minimizes daily production costs.",
+        "marks": 2
+      },
+      {
+        "label": "(b)",
+        "text": "State the minimum daily cost incurred by the firm.",
+        "marks": 1
+      },
+      {
+        "label": "(c)",
+        "text": "If each lens sells for a fixed price of $60, establish the profit function $P(x)$ and determine the production range for which the operation is strictly profitable.",
+        "marks": 3
+      }
     ],
     "markingGuide": "(a) x = -(-80)/(2*2) = 20 lenses. (b) C(20) = $400. (c) P(x) = 60x - (2x^2 - 80x + 1200) = -2x^2 + 140x - 1200. Roots at x = 10 and x = 60; profitable for 10 < x < 60."
   },
@@ -103,7 +151,7 @@
     "type": "Short Answer",
     "marks": 4,
     "text": "Solve for all real values of $x$:\n$$\\log_2(x + 2) + \\log_2(x - 2) = 5$$",
-    "markingGuide": "Combine into log_2((x+2)(x-2)) = log_2(x^2 - 4) = 5. x^2 - 4 = 32 => x^2 = 36. Since x > 2 for real logarithms, x = 6 only."
+    "markingGuide": "Combine into log_2((x+2)(x-2)) = log_2(x^2 - 4) = 5. x^2 - 4 = 32  implies  x^2 = 36. Since x > 2 for real logarithms, x = 6 only."
   },
   {
     "id": "alg_09",
@@ -114,10 +162,18 @@
     "marks": 5,
     "text": "Consider the algebraic expansion of $\\left(2x^2 - \\frac{1}{x}\\right)^9$.",
     "subparts": [
-      { "label": "(a)", "text": "Write down the general term $T_{r+1}$ in simplified index form.", "marks": 2 },
-      { "label": "(b)", "text": "Determine the value of $r$ for which the term is independent of $x$, and calculate the exact numerical coefficient of this term.", "marks": 3 }
+      {
+        "label": "(a)",
+        "text": "Write down the general term $T_{r+1}$ in simplified index form.",
+        "marks": 2
+      },
+      {
+        "label": "(b)",
+        "text": "Determine the value of $r$ for which the term is independent of $x$, and calculate the exact numerical coefficient of this term.",
+        "marks": 3
+      }
     ],
-    "markingGuide": "(a) T_{r+1} = 9Cr * (2x^2)^(9-r) * (-x^-1)^r = 9Cr * 2^(9-r) * (-1)^r * x^(18-3r). (b) 18 - 3r = 0 => r = 6. Coefficient = 9C6 * 2^3 * (-1)^6 = 84 * 8 * 1 = 672."
+    "markingGuide": "(a) T_{r+1} = 9Cr * (2x^2)^(9-r) * (-x^-1)^r = 9Cr * 2^(9-r) * (-1)^r * x^(18-3r). (b) 18 - 3r = 0  implies  r = 6. Coefficient = 9C6 * 2^3 * (-1)^6 = 84 * 8 * 1 = 672."
   },
   {
     "id": "alg_10",
@@ -128,10 +184,22 @@
     "marks": 1,
     "text": "Simplify $\\frac{4^{x+1} \\cdot 2^{x-1}}{8^x}$ to its simplest form.",
     "options": [
-      { "key": "A", "text": "2" },
-      { "key": "B", "text": "4" },
-      { "key": "C", "text": "2^{x}" },
-      { "key": "D", "text": "1" }
+      {
+        "key": "A",
+        "text": "2"
+      },
+      {
+        "key": "B",
+        "text": "4"
+      },
+      {
+        "key": "C",
+        "text": "2^{x}"
+      },
+      {
+        "key": "D",
+        "text": "1"
+      }
     ],
     "correctOption": "A",
     "markingGuide": "Express in base 2: 2^(2x+2) * 2^(x-1) / 2^(3x) = 2^(3x+1 - 3x) = 2^1 = 2."
@@ -165,9 +233,21 @@
     "marks": 5,
     "text": "Let $f(x) = x^3 - 6x^2 + 11x - 6$.",
     "subparts": [
-      { "label": "(a)", "text": "Verify that $(x - 1)$ is a factor of $f(x)$ using the factor theorem.", "marks": 1 },
-      { "label": "(b)", "text": "Fully factorize $f(x)$ into linear factors.", "marks": 2 },
-      { "label": "(c)", "text": "Hence, solve the inequality $x^3 - 6x^2 + 11x - 6 \\ge 0$.", "marks": 2 }
+      {
+        "label": "(a)",
+        "text": "Verify that $(x - 1)$ is a factor of $f(x)$ using the factor theorem.",
+        "marks": 1
+      },
+      {
+        "label": "(b)",
+        "text": "Fully factorize $f(x)$ into linear factors.",
+        "marks": 2
+      },
+      {
+        "label": "(c)",
+        "text": "Hence, solve the inequality $x^3 - 6x^2 + 11x - 6 \\ge 0$.",
+        "marks": 2
+      }
     ],
     "markingGuide": "(a) f(1) = 1 - 6 + 11 - 6 = 0. (b) Synthetic division gives (x-1)(x^2-5x+6) = (x-1)(x-2)(x-3). (c) Sign chart shows solution [1, 2] U [3, infinity)."
   },
@@ -180,13 +260,25 @@
     "marks": 1,
     "text": "What is the Euclidean distance between points $A(-2, 3)$ and $B(4, -5)$ in the Cartesian plane?",
     "options": [
-      { "key": "A", "text": "8 units" },
-      { "key": "B", "text": "10 units" },
-      { "key": "C", "text": "12 units" },
-      { "key": "D", "text": "\\sqrt{68} units" }
+      {
+        "key": "A",
+        "text": "8 units"
+      },
+      {
+        "key": "B",
+        "text": "10 units"
+      },
+      {
+        "key": "C",
+        "text": "12 units"
+      },
+      {
+        "key": "D",
+        "text": "\\sqrt{68} units"
+      }
     ],
     "correctOption": "B",
-    "markingGuide": "d = sqrt((4 - (-2))^2 + (-5 - 3)^2) = sqrt(6^2 + (-8)^2) = sqrt(36 + 64) = 10."
+    "markingGuide": "d = sqrt{})^2 + (-5 - 3)^2) = sqrt{}^2) = sqrt{} = 10."
   },
   {
     "id": "geom_02",
@@ -197,10 +289,22 @@
     "marks": 1,
     "text": "An inscribed angle subtends a diameter of a circle. What is the measure of this inscribed angle?",
     "options": [
-      { "key": "A", "text": "45°" },
-      { "key": "B", "text": "60°" },
-      { "key": "C", "text": "90°" },
-      { "key": "D", "text": "180°" }
+      {
+        "key": "A",
+        "text": "45°"
+      },
+      {
+        "key": "B",
+        "text": "60°"
+      },
+      {
+        "key": "C",
+        "text": "90°"
+      },
+      {
+        "key": "D",
+        "text": "180°"
+      }
     ],
     "correctOption": "C",
     "markingGuide": "Thales's Theorem states that an angle inscribed in a semicircle is always a right angle (90°)."
@@ -213,7 +317,7 @@
     "type": "Short Answer",
     "marks": 2,
     "text": "Two parallel lines are intersected by a transversal. If two co-interior (consecutive interior) angles have measures $(3x + 10)^\\circ$ and $(2x + 20)^\\circ$, calculate the value of $x$.",
-    "markingGuide": "(3x + 10) + (2x + 20) = 180 => 5x + 30 = 180 => 5x = 150 => x = 30."
+    "markingGuide": "(3x + 10) + (2x + 20) = 180  implies  5x + 30 = 180  implies  5x = 150  implies  x = 30."
   },
   {
     "id": "geom_04",
@@ -233,7 +337,7 @@
     "type": "Short Answer",
     "marks": 3,
     "text": "Tangents $PA$ and $PB$ are drawn to a circle with centre $O$ from an external point $P$. If $\\angle APB = 54^\\circ$, calculate the measure of $\\angle AOB$ and $\\angle OAB$.",
-    "markingGuide": "OA perp PA and OB perp PB. In quadrilateral PAOB, sum of angles is 360, so angle AOB = 180 - 54 = 126 deg. Triangle OAB is isosceles (OA = OB), so angle OAB = (180 - 126)/2 = 27 deg."
+    "markingGuide": "OA perp PA and OB perp PB. In quadrilateral PAOB, sum of angles is 360, so angle AOB = 180 - 54 = 126 ^circ. Triangle OAB is isosceles (OA = OB), so angle OAB = (180 - 126)/2 = 27 ^circ."
   },
   {
     "id": "geom_06",
@@ -244,13 +348,25 @@
     "marks": 2,
     "text": "A solid metal cone of base radius $6\\text{ cm}$ and height $12\\text{ cm}$ is melted down and recast into identical small spheres each of radius $3\\text{ cm}$. How many complete spheres are formed?",
     "options": [
-      { "key": "A", "text": "2" },
-      { "key": "B", "text": "4" },
-      { "key": "C", "text": "6" },
-      { "key": "D", "text": "8" }
+      {
+        "key": "A",
+        "text": "2"
+      },
+      {
+        "key": "B",
+        "text": "4"
+      },
+      {
+        "key": "C",
+        "text": "6"
+      },
+      {
+        "key": "D",
+        "text": "8"
+      }
     ],
     "correctOption": "B",
-    "markingGuide": "V_cone = (1/3)*pi*r^2*h = (1/3)*pi*36*12 = 144pi. V_sphere = (4/3)*pi*R^3 = (4/3)*pi*27 = 36pi. Count = 144pi / 36pi = 4."
+    "markingGuide": "_{} = (1/3)*pi*r^2*h = (1/3)*pi*36*12 = 144pi. _{} = (4/3)*pi*R^3 = (4/3)*pi*27 = 36pi. Count = 144pi / 36pi = 4."
   },
   {
     "id": "geom_07",
@@ -261,11 +377,23 @@
     "marks": 6,
     "text": "A circle $C$ has equation $x^2 + y^2 - 4x + 6y - 12 = 0$.",
     "subparts": [
-      { "label": "(a)", "text": "Find the coordinates of the centre and the exact radius of circle $C$.", "marks": 2 },
-      { "label": "(b)", "text": "Show that the point $P(5, 1)$ lies on the circumference of circle $C$.", "marks": 1 },
-      { "label": "(c)", "text": "Derive the equation of the tangent line to circle $C$ at point $P$, expressing your answer in the form $ax + by + c = 0$.", "marks": 3 }
+      {
+        "label": "(a)",
+        "text": "Find the coordinates of the centre and the exact radius of circle $C$.",
+        "marks": 2
+      },
+      {
+        "label": "(b)",
+        "text": "Show that the point $P(5, 1)$ lies on the circumference of circle $C$.",
+        "marks": 1
+      },
+      {
+        "label": "(c)",
+        "text": "Derive the equation of the tangent line to circle $C$ at point $P$, expressing your answer in the form $ax + by + c = 0$.",
+        "marks": 3
+      }
     ],
-    "markingGuide": "(a) Centre (2, -3); r = sqrt(2^2 + (-3)^2 - (-12)) = sqrt(4+9+12) = 5. (b) 5^2 + 1^2 - 4(5) + 6(1) - 12 = 25 + 1 - 20 + 6 - 12 = 0. (c) Gradient of normal OP = (1 - (-3))/(5 - 2) = 4/3. Tangent gradient = -3/4. y - 1 = -3/4(x - 5) => 3x + 4y - 19 = 0."
+    "markingGuide": "(a) Centre (2, -3); r = sqrt{}^2 - (-12)) = sqrt{} = 5. (b) 5^2 + 1^2 - 4(5) + 6(1) - 12 = 25 + 1 - 20 + 6 - 12 = 0. (c) Gradient of normal OP = (1 - (-3))/(5 - 2) = 4/3. Tangent gradient = -3/4. y - 1 = -3/4(x - 5)  implies  3x + 4y - 19 = 0."
   },
   {
     "id": "geom_08",
@@ -286,10 +414,18 @@
     "marks": 5,
     "text": "In the Cartesian plane, point $A$ has coordinates $(1, 2)$ and point $B$ has coordinates $(5, -2)$.",
     "subparts": [
-      { "label": "(a)", "text": "Determine the coordinates of the midpoint of $AB$ and the gradient of the line segment $AB$.", "marks": 2 },
-      { "label": "(b)", "text": "A point $P(x, y)$ moves such that its distance from $A$ is always twice its distance from $B$. Show that the locus of $P$ is a circle and find its centre and radius.", "marks": 3 }
+      {
+        "label": "(a)",
+        "text": "Determine the coordinates of the midpoint of $AB$ and the gradient of the line segment $AB$.",
+        "marks": 2
+      },
+      {
+        "label": "(b)",
+        "text": "A point $P(x, y)$ moves such that its distance from $A$ is always twice its distance from $B$. Show that the locus of $P$ is a circle and find its centre and radius.",
+        "marks": 3
+      }
     ],
-    "markingGuide": "(a) Midpoint = (3, 0); gradient = (-2 - 2)/(5 - 1) = -4/4 = -1. (b) PA = 2PB => PA^2 = 4PB^2 => (x-1)^2 + (y-2)^2 = 4[(x-5)^2 + (y+2)^2]. Expands to 3x^2 + 3y^2 - 38x + 20y + 111 = 0, a circle."
+    "markingGuide": "(a) Midpoint = (3, 0); gradient = (-2 - 2)/(5 - 1) = -4/4 = -1. (b) PA = 2PB  implies  PA^2 = 4PB^2  implies  (x-1)^2 + (y-2)^2 = 4[(x-5)^2 + (y+2)^2]. Expands to 3x^2 + 3y^2 - 38x + 20y + 111 = 0, a circle."
   },
   {
     "id": "geom_10",
@@ -299,7 +435,7 @@
     "type": "Short Answer",
     "marks": 3,
     "text": "In $\\triangle PQR$, $PQ = 7\\text{ cm}$, $QR = 9\\text{ cm}$, and $\\angle PQR = 60^\\circ$. Calculate the exact length of side $PR$ and find the area of the triangle.",
-    "markingGuide": "Cosine rule: PR^2 = 7^2 + 9^2 - 2(7)(9)cos(60) = 49 + 81 - 126(0.5) = 130 - 63 = 67 => PR = sqrt(67) cm. Area = 0.5 * 7 * 9 * sin(60) = (63*sqrt(3))/4 cm^2."
+    "markingGuide": "Cosine rule: PR^2 = 7^2 + 9^2 - 2(7)(9)cos(60) = 49 + 81 - 126(0.5) = 130 - 63 = 67  implies  PR = sqrt{} cm. Area = 0.5 * 7 * 9 * sin(60) = (63*sqrt{})/4 cm^2."
   },
   {
     "id": "geom_11",
@@ -310,13 +446,25 @@
     "marks": 1,
     "text": "A ladder $13\\text{ m}$ long leans against a vertical wall with its foot $5\\text{ m}$ away from the base of the wall. What height does the ladder reach on the wall?",
     "options": [
-      { "key": "A", "text": "10 m" },
-      { "key": "B", "text": "11 m" },
-      { "key": "C", "text": "12 m" },
-      { "key": "D", "text": "14 m" }
+      {
+        "key": "A",
+        "text": "10 m"
+      },
+      {
+        "key": "B",
+        "text": "11 m"
+      },
+      {
+        "key": "C",
+        "text": "12 m"
+      },
+      {
+        "key": "D",
+        "text": "14 m"
+      }
     ],
     "correctOption": "C",
-    "markingGuide": "Pythagorean theorem: h = sqrt(13^2 - 5^2) = sqrt(169 - 25) = sqrt(144) = 12 m."
+    "markingGuide": "Pythagorean theorem: h = sqrt{} = sqrt{} = sqrt{} = 12 m."
   },
   {
     "id": "geom_12",
@@ -326,7 +474,7 @@
     "type": "Short Answer",
     "marks": 2,
     "text": "Calculate the measure of each interior angle of a regular decagon (10-sided polygon).",
-    "markingGuide": "Sum of interior angles = (10 - 2) * 180 = 8 * 180 = 1440 deg. Each interior angle = 1440 / 10 = 144 deg."
+    "markingGuide": "Sum of interior angles = (10 - 2) * 180 = 8 * 180 = 1440 ^circ. Each interior angle = 1440 / 10 = 144 ^circ."
   },
   {
     "id": "trig_01",
@@ -337,13 +485,25 @@
     "marks": 1,
     "text": "Given that $\\sin \\theta = \\frac{3}{5}$ where $\\theta$ is an acute angle, what is the exact value of $\\tan \\theta$?",
     "options": [
-      { "key": "A", "text": "3/4" },
-      { "key": "B", "text": "4/3" },
-      { "key": "C", "text": "4/5" },
-      { "key": "D", "text": "5/3" }
+      {
+        "key": "A",
+        "text": "3/4"
+      },
+      {
+        "key": "B",
+        "text": "4/3"
+      },
+      {
+        "key": "C",
+        "text": "4/5"
+      },
+      {
+        "key": "D",
+        "text": "5/3"
+      }
     ],
     "correctOption": "A",
-    "markingGuide": "Opposite = 3, Hypotenuse = 5 => Adjacent = 4. tan(theta) = 3/4."
+    "markingGuide": "Opposite = 3, Hypotenuse = 5  implies  Adjacent = 4. tan(\theta) = 3/4."
   },
   {
     "id": "trig_02",
@@ -354,10 +514,22 @@
     "marks": 1,
     "text": "What is the exact numerical value of $\\cos(60^\\circ) + \\sin(30^\\circ) - \\tan(45^\\circ)$?",
     "options": [
-      { "key": "A", "text": "1" },
-      { "key": "B", "text": "0" },
-      { "key": "C", "text": "1/2" },
-      { "key": "D", "text": "\\sqrt{3}/2" }
+      {
+        "key": "A",
+        "text": "1"
+      },
+      {
+        "key": "B",
+        "text": "0"
+      },
+      {
+        "key": "C",
+        "text": "1/2"
+      },
+      {
+        "key": "D",
+        "text": "\\sqrt{3}/2"
+      }
     ],
     "correctOption": "B",
     "markingGuide": "1/2 + 1/2 - 1 = 0."
@@ -370,7 +542,7 @@
     "type": "Short Answer",
     "marks": 2,
     "text": "Simplify the expression $(\\sec \\theta - \\tan \\theta)(\\sec \\theta + \\tan \\theta)$ using fundamental identities.",
-    "markingGuide": "Difference of two squares: sec^2(theta) - tan^2(theta) = 1."
+    "markingGuide": "Difference of two squares: sec^2(\theta) - tan^2(\theta) = 1."
   },
   {
     "id": "trig_04",
@@ -380,7 +552,7 @@
     "type": "Short Answer",
     "marks": 3,
     "text": "From a point on horizontal ground $50\\text{ m}$ from the base of a vertical communications tower, the angle of elevation to the top of the tower is $35^\\circ$. Calculate the height of the tower correct to 1 decimal place. (Take $\\tan(35^\\circ) \\approx 0.7002$)",
-    "markingGuide": "h = 50 * tan(35 deg) = 50 * 0.7002 = 35.01 m approx 35.0 m."
+    "markingGuide": "h = 50 * tan(35 ^circ) = 50 * 0.7002 = 35.01 m approx 35.0 m."
   },
   {
     "id": "trig_05",
@@ -390,7 +562,7 @@
     "type": "Short Answer",
     "marks": 3,
     "text": "Prove the trigonometric identity for all non-quadrantal angles:\n$$\\frac{\\sin \\theta}{1 + \\cos \\theta} + \\frac{1 + \\cos \\theta}{\\sin \\theta} = 2 \\csc \\theta$$",
-    "markingGuide": "LHS = [sin^2(theta) + (1 + cos theta)^2] / [sin theta (1 + cos theta)] = [sin^2 + 1 + 2cos + cos^2] / denominator = [2 + 2cos theta] / denominator = 2(1 + cos theta) / [sin theta (1 + cos theta)] = 2 / sin theta = 2 csc theta."
+    "markingGuide": "LHS = [sin^2(\theta) + (1 + cos \theta)^2] / [sin \theta (1 + cos \theta)] = [sin^2 + 1 + 2cos + cos^2] / denominator = [2 + 2cos \theta] / denominator = 2(1 + cos \theta) / [sin \theta (1 + cos \theta)] = 2 / sin \theta = 2 csc \theta."
   },
   {
     "id": "trig_06",
@@ -401,10 +573,22 @@
     "marks": 2,
     "text": "If $\\cos \\alpha = \\frac{1}{3}$, what is the value of $\\cos(2\\alpha)$?",
     "options": [
-      { "key": "A", "text": "-7/9" },
-      { "key": "B", "text": "2/3" },
-      { "key": "C", "text": "-1/3" },
-      { "key": "D", "text": "7/9" }
+      {
+        "key": "A",
+        "text": "-7/9"
+      },
+      {
+        "key": "B",
+        "text": "2/3"
+      },
+      {
+        "key": "C",
+        "text": "-1/3"
+      },
+      {
+        "key": "D",
+        "text": "7/9"
+      }
     ],
     "correctOption": "A",
     "markingGuide": "cos(2alpha) = 2*cos^2(alpha) - 1 = 2*(1/9) - 1 = 2/9 - 9/9 = -7/9."
@@ -418,10 +602,18 @@
     "marks": 6,
     "text": "Consider the trigonometric equation $2\\cos^2 x - 5\\sin x - 4 = 0$ for $0^\\circ \\le x \\le 360^\\circ$.",
     "subparts": [
-      { "label": "(a)", "text": "Show that the equation can be written as $2\\sin^2 x + 5\\sin x + 2 = 0$.", "marks": 2 },
-      { "label": "(b)", "text": "Hence, solve the equation for all valid values of $x$ in the specified interval.", "marks": 4 }
+      {
+        "label": "(a)",
+        "text": "Show that the equation can be written as $2\\sin^2 x + 5\\sin x + 2 = 0$.",
+        "marks": 2
+      },
+      {
+        "label": "(b)",
+        "text": "Hence, solve the equation for all valid values of $x$ in the specified interval.",
+        "marks": 4
+      }
     ],
-    "markingGuide": "(a) Substitute cos^2 x = 1 - sin^2 x: 2(1 - sin^2 x) - 5sin x - 4 = 0 => 2 - 2sin^2 x - 5sin x - 4 = 0 => -2sin^2 x - 5sin x - 2 = 0 => 2sin^2 x + 5sin x + 2 = 0. (b) (2sin x + 1)(sin x + 2) = 0. sin x = -2 has no real solutions. sin x = -1/2 in [0, 360] gives x = 210 deg and x = 330 deg."
+    "markingGuide": "(a) Substitute cos^2 x = 1 - sin^2 x: 2(1 - sin^2 x) - 5sin x - 4 = 0  implies  2 - 2sin^2 x - 5sin x - 4 = 0  implies  -2sin^2 x - 5sin x - 2 = 0  implies  2sin^2 x + 5sin x + 2 = 0. (b) (2sin x + 1)(sin x + 2) = 0. sin x = -2 has no real solutions. sin x = -1/2 in [0, 360] gives x = 210 ^circ and x = 330 ^circ."
   },
   {
     "id": "trig_08",
@@ -431,7 +623,7 @@
     "type": "Short Answer",
     "marks": 4,
     "text": "In an acute triangle $ABC$, side $b = 10\\text{ cm}$, side $c = 14\\text{ cm}$, and the enclosed angle $A = 48^\\circ$. Calculate the length of side $a$ and determine $\\angle B$ to the nearest tenth of a degree.",
-    "markingGuide": "a^2 = 10^2 + 14^2 - 2(10)(14)cos(48) = 100 + 196 - 280(0.6691) = 296 - 187.35 = 108.65 => a = 10.42 cm. sin(B)/10 = sin(48)/10.42 => sin(B) = 10*0.7431/10.42 = 0.7131 => B = 45.5 deg."
+    "markingGuide": "a^2 = 10^2 + 14^2 - 2(10)(14)cos(48) = 100 + 196 - 280(0.6691) = 296 - 187.35 = 108.65  implies  a = 10.42 cm. sin(B)/10 = sin(48)/10.42  implies  sin(B) = 10*0.7431/10.42 = 0.7131  implies  B = 45.5 ^circ."
   },
   {
     "id": "trig_09",
@@ -442,10 +634,18 @@
     "marks": 5,
     "text": "The function $f(\\theta) = 3\\sin \\theta + 4\\cos \\theta$ represents an oscillating electrical potential.",
     "subparts": [
-      { "label": "(a)", "text": "Express $f(\\theta)$ in the auxiliary form $R\\sin(\\theta + \\alpha)$, where $R > 0$ and $0 < \\alpha < \\frac{\\pi}{2}$.", "marks": 3 },
-      { "label": "(b)", "text": "State the maximum voltage potential and find the smallest positive angle $\\theta$ at which this maximum occurs.", "marks": 2 }
+      {
+        "label": "(a)",
+        "text": "Express $f(\\theta)$ in the auxiliary form $R\\sin(\\theta + \\alpha)$, where $R > 0$ and $0 < \\alpha < \\frac{\\pi}{2}$.",
+        "marks": 3
+      },
+      {
+        "label": "(b)",
+        "text": "State the maximum voltage potential and find the smallest positive angle $\\theta$ at which this maximum occurs.",
+        "marks": 2
+      }
     ],
-    "markingGuide": "(a) R = sqrt(3^2 + 4^2) = 5. tan(alpha) = 4/3 => alpha = 0.927 rad (or 53.13 deg). f(theta) = 5sin(theta + 0.927). (b) Maximum = 5. Occurs when theta + 0.927 = pi/2 = 1.571 => theta = 0.644 rad (36.87 deg)."
+    "markingGuide": "(a) R = sqrt{} = 5. tan(alpha) = 4/3  implies  alpha = 0.927 rad (or 53.13 ^circ). f(\theta) = 5sin(\theta + 0.927). (b) Maximum = 5. Occurs when \theta + 0.927 = pi/2 = 1.571  implies  \theta = 0.644 rad (36.87 ^circ)."
   },
   {
     "id": "trig_10",
@@ -455,7 +655,7 @@
     "type": "Short Answer",
     "marks": 2,
     "text": "A circle of radius $8\\text{ cm}$ contains a central sector with angle $\\theta = \\frac{3\\pi}{4}\\text{ radians}$. Find the exact perimeter of this sector in terms of $\\pi$.",
-    "markingGuide": "Arc length s = r*theta = 8 * (3pi/4) = 6pi cm. Perimeter = 2r + s = 16 + 6pi cm."
+    "markingGuide": "Arc length s = r*\theta = 8 * (3pi/4) = 6pi cm. Perimeter = 2r + s = 16 + 6pi cm."
   },
   {
     "id": "trig_11",
@@ -476,10 +676,22 @@
     "marks": 1,
     "text": "Which expression is identically equivalent to $\\frac{1 - \\cos^2 x}{\\sin x}$ for $\\sin x \\ne 0$?",
     "options": [
-      { "key": "A", "text": "\\cos x" },
-      { "key": "B", "text": "\\sin x" },
-      { "key": "C", "text": "\\tan x" },
-      { "key": "D", "text": "\\csc x" }
+      {
+        "key": "A",
+        "text": "\\cos x"
+      },
+      {
+        "key": "B",
+        "text": "\\sin x"
+      },
+      {
+        "key": "C",
+        "text": "\\tan x"
+      },
+      {
+        "key": "D",
+        "text": "\\csc x"
+      }
     ],
     "correctOption": "B",
     "markingGuide": "1 - cos^2 x = sin^2 x. sin^2 x / sin x = sin x."
@@ -493,13 +705,25 @@
     "marks": 1,
     "text": "A vehicle accelerates uniformly from rest at $2.5\\text{ m/s}^2$ along a straight track for $8.0\\text{ s}$. What final speed does it attain?",
     "options": [
-      { "key": "A", "text": "10 m/s" },
-      { "key": "B", "text": "16 m/s" },
-      { "key": "C", "text": "20 m/s" },
-      { "key": "D", "text": "80 m/s" }
+      {
+        "key": "A",
+        "text": "10 m/s"
+      },
+      {
+        "key": "B",
+        "text": "16 m/s"
+      },
+      {
+        "key": "C",
+        "text": "20 m/s"
+      },
+      {
+        "key": "D",
+        "text": "80 m/s"
+      }
     ],
     "correctOption": "C",
-    "markingGuide": "v = u + at = 0 + (2.5)(8.0) = 20 m/s."
+    "markingGuide": "v = u + at = 0 + (2.5)(8.0) = 20 \text{ m/s}."
   },
   {
     "id": "phy_02",
@@ -510,13 +734,25 @@
     "marks": 1,
     "text": "A constant net horizontal force of $150\\text{ N}$ acts on a $30\\text{ kg}$ crate resting on a frictionless surface. What is the acceleration produced?",
     "options": [
-      { "key": "A", "text": "0.2 m/s^2" },
-      { "key": "B", "text": "5.0 m/s^2" },
-      { "key": "C", "text": "45 m/s^2" },
-      { "key": "D", "text": "4500 m/s^2" }
+      {
+        "key": "A",
+        "text": "0.2 m/s^2"
+      },
+      {
+        "key": "B",
+        "text": "5.0 m/s^2"
+      },
+      {
+        "key": "C",
+        "text": "45 m/s^2"
+      },
+      {
+        "key": "D",
+        "text": "4500 m/s^2"
+      }
     ],
     "correctOption": "B",
-    "markingGuide": "F = ma => a = F/m = 150/30 = 5.0 m/s^2."
+    "markingGuide": "F = ma  implies  a = F/m = 150/30 = 5.0 \text{ \text{ m/s}}^2."
   },
   {
     "id": "phy_03",
@@ -536,7 +772,7 @@
     "type": "Short Answer",
     "marks": 3,
     "text": "A railway truck of mass $1200\\text{ kg}$ travelling at $4.0\\text{ m/s}$ collides and couples with a stationary truck of mass $800\\text{ kg}$. Calculate the common velocity of the coupled trucks immediately following impact.",
-    "markingGuide": "Total momentum before = total momentum after. (1200)(4.0) + (800)(0) = (1200 + 800)v => 4800 = 2000v => v = 2.4 m/s."
+    "markingGuide": "Total momentum before = total momentum after. (1200)(4.0) + (800)(0) = (1200 + 800)v  implies  4800 = 2000v  implies  v = 2.4 \text{ m/s}."
   },
   {
     "id": "phy_05",
@@ -546,7 +782,7 @@
     "type": "Short Answer",
     "marks": 3,
     "text": "A racing car of mass $900\\text{ kg}$ negotiates a level circular curve of radius $60\\text{ m}$ at a constant speed of $24\\text{ m/s}$. Determine the minimum centripetal force required to prevent sideways skidding, and identify the physical agent providing this force.",
-    "markingGuide": "F_c = (m * v^2) / r = (900 * 576) / 60 = 8640 N. The physical force providing this centripetal acceleration is the lateral static friction between the tires and the road surface."
+    "markingGuide": "_{} = (m * v^2) / r = (900 * 576) / 60 = 8640 N. The physical force providing this centripetal acceleration is the lateral static friction between the tires and the road surface."
   },
   {
     "id": "phy_06",
@@ -557,13 +793,25 @@
     "marks": 2,
     "text": "A stone of mass $0.50\\text{ kg}$ is dropped from the top of a $45\\text{ m}$ high cliff. Neglecting air resistance and taking $g = 9.8\\text{ m/s}^2$, what is its impact speed at the bottom?",
     "options": [
-      { "key": "A", "text": "21 m/s" },
-      { "key": "B", "text": "29.7 m/s" },
-      { "key": "C", "text": "44.1 m/s" },
-      { "key": "D", "text": "882 m/s" }
+      {
+        "key": "A",
+        "text": "21 m/s"
+      },
+      {
+        "key": "B",
+        "text": "29.7 m/s"
+      },
+      {
+        "key": "C",
+        "text": "44.1 m/s"
+      },
+      {
+        "key": "D",
+        "text": "882 m/s"
+      }
     ],
     "correctOption": "B",
-    "markingGuide": "v = sqrt(2gh) = sqrt(2 * 9.8 * 45) = sqrt(882) approx 29.7 m/s."
+    "markingGuide": "v = sqrt{} = sqrt{} = sqrt{} approx 29.7 \text{ m/s}."
   },
   {
     "id": "phy_07",
@@ -574,11 +822,23 @@
     "marks": 6,
     "text": "A projectile is launched from ground level with an initial launch speed of $u = 40\\text{ m/s}$ at an elevation angle of $\\theta = 30^\\circ$ above the horizontal. Assume $g = 9.8\\text{ m/s}^2$ and ignore atmospheric resistance.",
     "subparts": [
-      { "label": "(a)", "text": "Calculate the initial horizontal and vertical velocity components $u_x$ and $u_y$.", "marks": 1 },
-      { "label": "(b)", "text": "Determine the maximum height attained by the projectile above the launch plane.", "marks": 2 },
-      { "label": "(c)", "text": "Calculate the total flight time and the total horizontal range achieved.", "marks": 3 }
+      {
+        "label": "(a)",
+        "text": "Calculate the initial horizontal and vertical velocity components $u_x$ and $u_y$.",
+        "marks": 1
+      },
+      {
+        "label": "(b)",
+        "text": "Determine the maximum height attained by the projectile above the launch plane.",
+        "marks": 2
+      },
+      {
+        "label": "(c)",
+        "text": "Calculate the total flight time and the total horizontal range achieved.",
+        "marks": 3
+      }
     ],
-    "markingGuide": "(a) u_x = 40cos(30) = 34.64 m/s; u_y = 40sin(30) = 20.0 m/s. (b) H = u_y^2 / (2g) = 400 / 19.6 = 20.41 m. (c) T = 2u_y / g = 40 / 9.8 = 4.08 s. Range = u_x * T = 34.64 * 4.08 = 141.38 m."
+    "markingGuide": "(a) _{} = 40cos(30) = 34.64 \text{ m/s}; _{} = 40sin(30) = 20.0 \text{ m/s}. (b) H = _{}^2 / (2g) = 400 / 19.6 = 20.41 m. (c) T = 2u_y / g = 40 / 9.8 = 4.08 s. Range = _{} * T = 34.64 * 4.08 = 141.38 m."
   },
   {
     "id": "phy_08",
@@ -588,7 +848,7 @@
     "type": "Short Answer",
     "marks": 4,
     "text": "A wooden block of mass $8.0\\text{ kg}$ rests on a rough plane inclined at $35^\\circ$ to the horizontal. If the coefficient of static friction $\\mu_s = 0.45$, determine whether the block will slide spontaneously down the plane when released from rest. Show complete mathematical reasoning (use $g = 9.8\\text{ m/s}^2$).",
-    "markingGuide": "Downslope gravitational component: F_down = mg*sin(35) = 8 * 9.8 * 0.5736 = 44.97 N. Maximum static friction: f_max = mu_s * mg*cos(35) = 0.45 * 8 * 9.8 * 0.8192 = 28.90 N. Since F_down > f_max (44.97 N > 28.90 N), net resultant down the plane is positive, so the block slides spontaneously."
+    "markingGuide": "Downslope gravitational component: _{} = mg*sin(35) = 8 * 9.8 * 0.5736 = 44.97 N. Maximum static friction: _{} = mu_s * mg*cos(35) = 0.45 * 8 * 9.8 * 0.8192 = 28.90 N. Since _{} > _{} (44.97 N > 28.90 N), net resultant down the plane is positive, so the block slides spontaneously."
   },
   {
     "id": "phy_09",
@@ -599,11 +859,23 @@
     "marks": 5,
     "text": "A golf ball of mass $0.045\\text{ kg}$ initially stationary on a tee is struck by a club head. The impact force varies linearly from $0$ to $4500\\text{ N}$ in $0.20\\text{ ms}$, then decreases linearly to $0$ in $0.40\\text{ ms}$.",
     "subparts": [
-      { "label": "(a)", "text": "Calculate the total impulse delivered to the ball during the impact duration.", "marks": 2 },
-      { "label": "(b)", "text": "Calculate the launch velocity of the golf ball leaving the club face.", "marks": 2 },
-      { "label": "(c)", "text": "State the average impulsive force exerted on the ball throughout the contact window.", "marks": 1 }
+      {
+        "label": "(a)",
+        "text": "Calculate the total impulse delivered to the ball during the impact duration.",
+        "marks": 2
+      },
+      {
+        "label": "(b)",
+        "text": "Calculate the launch velocity of the golf ball leaving the club face.",
+        "marks": 2
+      },
+      {
+        "label": "(c)",
+        "text": "State the average impulsive force exerted on the ball throughout the contact window.",
+        "marks": 1
+      }
     ],
-    "markingGuide": "(a) Force-time curve is triangular. Total time = 0.60 ms = 0.0006 s. Impulse J = Area = 0.5 * Base * Peak Force = 0.5 * 0.0006 * 4500 = 1.35 N s. (b) J = m*v => v = 1.35 / 0.045 = 30.0 m/s. (c) F_avg = J / delta_t = 1.35 / 0.0006 = 2250 N."
+    "markingGuide": "(a) Force-time curve is triangular. Total time = 0.60 ms = 0.0006 s. Impulse J = Area = 0.5 * Base * Peak Force = 0.5 * 0.0006 * 4500 = 1.35 N s. (b) J = m*v  implies  v = 1.35 / 0.045 = 30.0 \text{ m/s}. (c) _{} = J / delta_t = 1.35 / 0.0006 = 2250 N."
   },
   {
     "id": "phy_10",
@@ -613,7 +885,7 @@
     "type": "Short Answer",
     "marks": 2,
     "text": "A vertical helical spring with stiffness constant $k = 250\\text{ N/m}$ extends by $0.12\\text{ m}$ under an attached load. Calculate the elastic strain energy stored within the spring.",
-    "markingGuide": "E_p = 0.5 * k * x^2 = 0.5 * 250 * (0.12)^2 = 125 * 0.0144 = 1.80 Joules."
+    "markingGuide": "_{} = 0.5 * k * x^2 = 0.5 * 250 * (0.12)^2 = 125 * 0.0144 = 1.80 Joules."
   },
   {
     "id": "phy_11",
@@ -623,7 +895,7 @@
     "type": "Short Answer",
     "marks": 3,
     "text": "A uniform steel beam of length $4.0\\text{ m}$ and weight $300\\text{ N}$ is pivoted at its centre. A weight of $200\\text{ N}$ is hung $1.5\\text{ m}$ to the left of the pivot. Where must a $250\\text{ N}$ weight be placed on the right side to establish rotational equilibrium?",
-    "markingGuide": "Clockwise torque = Counter-clockwise torque. (200 N)(1.5 m) = (250 N)(d) => 300 = 250d => d = 1.2 meters to the right of the pivot."
+    "markingGuide": "Clockwise torque = Counter-clockwise torque. (200 N)(1.5 m) = (250 N)(d)  implies  300 = 250d  implies  d = 1.2 meters to the right of the pivot."
   },
   {
     "id": "phy_12",
@@ -634,10 +906,22 @@
     "marks": 1,
     "text": "A diver descends to a depth of $25\\text{ m}$ in seawater of density $1025\\text{ kg/m}^3$. Taking $g = 9.8\\text{ m/s}^2$, what hydrostatic gauge pressure is exerted on the diver?",
     "options": [
-      { "key": "A", "text": "25.1 kPa" },
-      { "key": "B", "text": "100.5 kPa" },
-      { "key": "C", "text": "251.1 kPa" },
-      { "key": "D", "text": "2511 kPa" }
+      {
+        "key": "A",
+        "text": "25.1 kPa"
+      },
+      {
+        "key": "B",
+        "text": "100.5 kPa"
+      },
+      {
+        "key": "C",
+        "text": "251.1 kPa"
+      },
+      {
+        "key": "D",
+        "text": "2511 kPa"
+      }
     ],
     "correctOption": "C",
     "markingGuide": "P = rho * g * h = 1025 * 9.8 * 25 = 251,125 Pa = 251.1 kPa."
@@ -651,13 +935,25 @@
     "marks": 1,
     "text": "An atom of isotope $^{35}_{17}\\text{Cl}$ contains which combination of subatomic particles?",
     "options": [
-      { "key": "A", "text": "17 protons, 17 neutrons, 18 electrons" },
-      { "key": "B", "text": "17 protons, 18 neutrons, 17 electrons" },
-      { "key": "C", "text": "18 protons, 17 neutrons, 17 electrons" },
-      { "key": "D", "text": "35 protons, 17 neutrons, 18 electrons" }
+      {
+        "key": "A",
+        "text": "17 protons, 17 neutrons, 18 electrons"
+      },
+      {
+        "key": "B",
+        "text": "17 protons, 18 neutrons, 17 electrons"
+      },
+      {
+        "key": "C",
+        "text": "18 protons, 17 neutrons, 17 electrons"
+      },
+      {
+        "key": "D",
+        "text": "35 protons, 17 neutrons, 18 electrons"
+      }
     ],
     "correctOption": "B",
-    "markingGuide": "Atomic number Z = 17 (protons = electrons = 17). Mass number A = 35 => neutrons = 35 - 17 = 18."
+    "markingGuide": "Atomic number Z = 17 (protons = electrons = 17). Mass number A = 35  implies  neutrons = 35 - 17 = 18."
   },
   {
     "id": "chem_02",
@@ -668,10 +964,22 @@
     "marks": 1,
     "text": "Which pair of elements forms a compound dominated by ionic bonding?",
     "options": [
-      { "key": "A", "text": "Carbon and Oxygen" },
-      { "key": "B", "text": "Nitrogen and Hydrogen" },
-      { "key": "C", "text": "Magnesium and Fluorine" },
-      { "key": "D", "text": "Phosphorus and Chlorine" }
+      {
+        "key": "A",
+        "text": "Carbon and Oxygen"
+      },
+      {
+        "key": "B",
+        "text": "Nitrogen and Hydrogen"
+      },
+      {
+        "key": "C",
+        "text": "Magnesium and Fluorine"
+      },
+      {
+        "key": "D",
+        "text": "Phosphorus and Chlorine"
+      }
     ],
     "correctOption": "C",
     "markingGuide": "Magnesium is an electropositive alkaline earth metal and fluorine is an electronegative halogen, giving large electronegativity difference (delta EN > 2.0)."
@@ -694,7 +1002,7 @@
     "type": "Short Answer",
     "marks": 3,
     "text": "Calculate the mass of calcium oxide ($\\text{CaO}$) produced by the thermal decomposition of $25.0\\text{ g}$ of pure calcium carbonate ($\\text{CaCO}_3$). (Molar masses: $\\text{Ca} = 40.08, \\text{C} = 12.01, \\text{O} = 16.00\\text{ g/mol}$)",
-    "markingGuide": "CaCO3 -> CaO + CO2. M(CaCO3) = 100.09 g/mol. M(CaO) = 56.08 g/mol. Moles CaCO3 = 25.0 / 100.09 = 0.2498 mol. Mass CaO = 0.2498 * 56.08 = 14.01 g."
+    "markingGuide": "CaCO3  longrightarrow  CaO + CO2. M(CaCO3) = 100.09 \text{ g/mol}. M(CaO) = 56.08 \text{ g/mol}. Moles CaCO3 = 25.0 / 100.09 = 0.2498 mol. Mass CaO = 0.2498 * 56.08 = 14.01 g."
   },
   {
     "id": "chem_05",
@@ -715,10 +1023,22 @@
     "marks": 2,
     "text": "Which element has the highest first ionization energy?",
     "options": [
-      { "key": "A", "text": "Lithium (Li)" },
-      { "key": "B", "text": "Fluorine (F)" },
-      { "key": "C", "text": "Neon (Ne)" },
-      { "key": "D", "text": "Sodium (Na)" }
+      {
+        "key": "A",
+        "text": "Lithium (Li)"
+      },
+      {
+        "key": "B",
+        "text": "Fluorine (F)"
+      },
+      {
+        "key": "C",
+        "text": "Neon (Ne)"
+      },
+      {
+        "key": "D",
+        "text": "Sodium (Na)"
+      }
     ],
     "correctOption": "C",
     "markingGuide": "First ionization energy increases across a period and decreases down a group; Neon possesses a stable octet valence shell with highest effective nuclear charge."
@@ -732,9 +1052,21 @@
     "marks": 6,
     "text": "Zinc metal reacts with dilute sulfuric acid according to the balanced chemical equation:\n$$\\text{Zn}(s) + \\text{H}_2\\text{SO}_4(aq) \\rightarrow \\text{ZnSO}_4(aq) + \\text{H}_2(g)$$",
     "subparts": [
-      { "label": "(a)", "text": "Calculate the theoretical volume of hydrogen gas evolved at Standard Temperature and Pressure (STP, where $V_m = 22.4\\text{ dm}^3/\\text{mol}$) when $13.08\\text{ g}$ of zinc reacts completely. ($A_r(\\text{Zn}) = 65.4$)", "marks": 2 },
-      { "label": "(b)", "text": "If the reaction yielded an experimentally collected gas volume of $4.03\\text{ dm}^3$, determine the percentage yield.", "marks": 2 },
-      { "label": "(c)", "text": "Using the ideal gas equation $PV = nRT$, determine the pressure exerted if this collected gas is transferred to a rigid $2.5\\text{ L}$ cylinder at $298\\text{ K}$. ($R = 8.314\\text{ J/(mol K)}$)", "marks": 2 }
+      {
+        "label": "(a)",
+        "text": "Calculate the theoretical volume of hydrogen gas evolved at Standard Temperature and Pressure (STP, where $V_m = 22.4\\text{ dm}^3/\\text{mol}$) when $13.08\\text{ g}$ of zinc reacts completely. ($A_r(\\text{Zn}) = 65.4$)",
+        "marks": 2
+      },
+      {
+        "label": "(b)",
+        "text": "If the reaction yielded an experimentally collected gas volume of $4.03\\text{ dm}^3$, determine the percentage yield.",
+        "marks": 2
+      },
+      {
+        "label": "(c)",
+        "text": "Using the ideal gas equation $PV = nRT$, determine the pressure exerted if this collected gas is transferred to a rigid $2.5\\text{ L}$ cylinder at $298\\text{ K}$. ($R = 8.314\\text{ J/(mol K)}$)",
+        "marks": 2
+      }
     ],
     "markingGuide": "(a) n(Zn) = 13.08 / 65.4 = 0.200 mol. V(H2) = 0.200 * 22.4 = 4.48 dm^3. (b) % yield = (4.03 / 4.48) * 100 = 89.96% approx 90.0%. (c) n = 4.03 / 22.4 = 0.1799 mol. P = nRT/V = (0.1799 * 8.314 * 298) / 0.0025 m^3 = 178,280 Pa = 178.3 kPa."
   },
@@ -746,7 +1078,7 @@
     "type": "Short Answer",
     "marks": 4,
     "text": "A student titrates a $25.0\\text{ mL}$ aliquot of an unknown sodium hydroxide ($\\text{NaOH}$) solution against $0.150\\text{ M}$ standard sulfuric acid ($\\text{H}_2\\text{SO}_4$). The mean endpoint titre recorded is $18.40\\text{ mL}$. Write the balanced chemical equation and calculate the exact molar concentration of the $\\text{NaOH}$ solution.",
-    "markingGuide": "2NaOH + H2SO4 -> Na2SO4 + 2H2O. Moles H2SO4 = 0.01840 L * 0.150 M = 0.00276 mol. Moles NaOH = 2 * 0.00276 = 0.00552 mol. [NaOH] = 0.00552 mol / 0.0250 L = 0.2208 M approx 0.221 M."
+    "markingGuide": "2NaOH + H2SO4  longrightarrow  Na2SO4 + 2H2O. Moles H2SO4 = 0.01840 L * 0.150 M = 0.00276 mol. Moles NaOH = 2 * 0.00276 = 0.00552 mol. [NaOH] = 0.00552 mol / 0.0250 L = 0.2208 M approx 0.221 M."
   },
   {
     "id": "chem_09",
@@ -757,10 +1089,18 @@
     "marks": 5,
     "text": "Calculate the standard enthalpy of formation $\\Delta H_f^\\circ$ of liquid benzene ($\\text{C}_6\\text{H}_6(l)$) from the following standard combustion data:",
     "subparts": [
-      { "label": "(a)", "text": "Write the balanced chemical equations for the combustion of $\\text{C}(s)$, $\\text{H}_2(g)$, and $\\text{C}_6\\text{H}_6(l)$.", "marks": 2 },
-      { "label": "(b)", "text": "Given $\\Delta H_c^\\circ[\\text{C}] = -393.5\\text{ kJ/mol}$, $\\Delta H_c^\\circ[\\text{H}_2] = -285.8\\text{ kJ/mol}$, and $\\Delta H_c^\\circ[\\text{C}_6\\text{H}_6] = -3267.0\\text{ kJ/mol}$, apply Hess's law to calculate $\\Delta H_f^\\circ[\\text{C}_6\\text{H}_6(l)]$.", "marks": 3 }
+      {
+        "label": "(a)",
+        "text": "Write the balanced chemical equations for the combustion of $\\text{C}(s)$, $\\text{H}_2(g)$, and $\\text{C}_6\\text{H}_6(l)$.",
+        "marks": 2
+      },
+      {
+        "label": "(b)",
+        "text": "Given $\\Delta H_c^\\circ[\\text{C}] = -393.5\\text{ kJ/mol}$, $\\Delta H_c^\\circ[\\text{H}_2] = -285.8\\text{ kJ/mol}$, and $\\Delta H_c^\\circ[\\text{C}_6\\text{H}_6] = -3267.0\\text{ kJ/mol}$, apply Hess's law to calculate $\\Delta H_f^\\circ[\\text{C}_6\\text{H}_6(l)]$.",
+        "marks": 3
+      }
     ],
-    "markingGuide": "(a) C + O2 -> CO2; H2 + 0.5O2 -> H2O; C6H6 + 7.5O2 -> 6CO2 + 3H2O. (b) 6C(s) + 3H2(g) -> C6H6(l). Delta H_f = 6*(-393.5) + 3*(-285.8) - (-3267.0) = -2361.0 - 857.4 + 3267.0 = +48.6 kJ/mol."
+    "markingGuide": "(a) C + O2  longrightarrow  CO2; H2 + 0.5O2  longrightarrow  H2O; C6H6 + 7.5O2  longrightarrow  6CO2 + 3H2O. (b) 6C(s) + 3H2(g)  longrightarrow  C6H6(l). Delta _{} = 6*(-393.5) + 3*(-285.8) - (-3267.0) = -2361.0 - 857.4 + 3267.0 = +48.6 \text{ kJ/mol}."
   },
   {
     "id": "chem_10",
@@ -791,10 +1131,22 @@
     "marks": 1,
     "text": "How many total oxygen atoms are present in $0.50\\text{ moles}$ of sulfuric acid ($\\text{H}_2\\text{SO}_4$)? (Take $N_A = 6.02 \\times 10^{23}\\text{ mol}^{-1}$)",
     "options": [
-      { "key": "A", "text": "3.01 x 10^23" },
-      { "key": "B", "text": "6.02 x 10^23" },
-      { "key": "C", "text": "1.20 x 10^24" },
-      { "key": "D", "text": "2.41 x 10^24" }
+      {
+        "key": "A",
+        "text": "3.01 x 10^23"
+      },
+      {
+        "key": "B",
+        "text": "6.02 x 10^23"
+      },
+      {
+        "key": "C",
+        "text": "1.20 x 10^24"
+      },
+      {
+        "key": "D",
+        "text": "2.41 x 10^24"
+      }
     ],
     "correctOption": "C",
     "markingGuide": "Each mole of H2SO4 has 4 moles of O atoms. In 0.50 mol: 0.50 * 4 = 2.0 moles of O atoms. Total atoms = 2.0 * 6.02 * 10^23 = 1.20 * 10^24 atoms."

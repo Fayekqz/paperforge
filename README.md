@@ -1,108 +1,84 @@
-<!--
-Assumptions & Design Decisions:
-1. Mark Granularity & Hard Constraint: Total marks is treated as an inviolable hard constraint. To guarantee exact mark totals without fractional rounding errors, the solver uses an integer reachability table (subset sum dynamic programming) seeded by whole question mark denominations (1, 2, 3, 4, 5, 6, 8 marks).
-2. Soft Constraint Multi-Objective Penalty: Difficulty mix, topic weightage, and question-type formats are treated as soft constraints optimized via multi-restart local search minimizing squared mark deviations.
-3. Swapping Hard Constraint Invariant: Single-question swaps strictly restrict candidates to questions from the unassigned bank possessing the exact same marks as the question being replaced. This ensures an in-place swap never alters the paper's total marks.
-4. Typography & Styling: Pair of Google Fonts (Lora for the authentic exam paper sheet, IBM Plex Sans for the instrument chrome) in accordance with the academic instrument design specification.
--->
+# PaperForge — Smart Question Paper Generator
 
-# PaperForge: Academic Question Paper Generator & Constraint Solver
-
-PaperForge is a precision assessment instrument designed for secondary and collegiate STEM educators. It allows teachers to generate syllabus-compliant examination papers in Mathematics and Natural Sciences (Algebra, Geometry, Trigonometry, Mechanics, and Chemistry) by establishing hard mark constraints and soft curriculum distribution targets.
+A lightweight, deterministic question paper generator and constraint optimizer built for secondary and collegiate STEM teachers (Mathematics, Physics, Chemistry).
 
 ---
 
-## Approach: Why Constraint-Solving Over Pure LLM Generation
+## 1. Approach & Why
 
-In educational assessment, **determinism, mathematical precision, and auditability outweigh generative flexibility**. While Large Language Models excels at conversational prose and unbounded text generation, using an LLM directly to assemble an examination paper introduces severe systemic flaws:
+### Deterministic Constraint Solver vs. Pure LLM Generation
 
-1. **Arithmetic Hallucinations & Mark Drift**: LLMs struggle with discrete integer partition constraints. A prompt requesting "a 40-mark paper with 30% easy, 50% medium, 20% hard" frequently yields questions whose assigned marks sum to 38 or 43, or where sub-parts do not tally to the question total. In high-stakes testing, an exam that miscalculates total marks is invalid.
-2. **Pedagogical Auditability & Syllabus Compliance**: Schools and examination syndicates must justify how every mark is allocated. A deterministic constraint solver provides an immutable mathematical ledger: every selected question maps to a verified curriculum ID with tested answer keys, rather than an unvetted LLM response that may contain subtle factual inaccuracies or hallucinated constants (e.g., misquoted molar masses or unphysical projectile trajectories).
-3. **Reproducibility & Fair Seeding**: Given an identical constraint vector and seed, PaperForge reproduces the exact same examination paper every time. This enables parallel examination forms (Form A / Form B) with mathematically equivalent difficulty and topic distributions.
-4. **Latency & Deterministic SLA**: Constraint optimization over a curated question bank executes in 5–15 milliseconds on a serverless function, with zero API token costs and no risk of timeout or provider downtime during exam creation sessions.
+For educational assessments, mathematical accuracy, syllabus compliance, and auditability are non-negotiable. Using an unconstrained LLM directly to assemble an examination paper has well-known failure modes:
 
----
+1. **Mark Drift & Arithmetic Errors**: Large Language Models frequently miscalculate discrete integer partitions (e.g. producing 43 marks when 40 was requested, or sub-parts that don't add up to the question total).
+2. **Pedagogical Auditability**: Educators need to know exactly which curriculum items are tested and why specific tradeoffs were made. A deterministic constraint solver provides a clear, verifiable record for every question.
+3. **Speed & Reliability**: The local Dynamic Programming subset-sum + local search solver runs in **5–15ms**, with zero API token overhead, zero rate limits, and reliable offline operation.
 
-## Handling Unsatisfiable Constraints: The Relax-and-Report Strategy
-
-Real-world question banks are finite and discrete. If a teacher requests 35% Hard Algebra in a 40-mark paper, that requires 14 marks of Hard Algebra. If the bank only contains one 6-mark and one 4-mark hard algebra problem (total 10 marks), the constraint is mathematically unsatisfiable without violating either the total marks, the topic quota, or the difficulty threshold.
-
-Traditional software fails in one of two ways: either it throws an unhelpful error ("Cannot generate paper"), or it **silently substitutes** mismatched questions, misleading the teacher about the paper's true balance.
-
-PaperForge implements a strict **Relax-and-Report Strategy**:
-
-- **Hard vs. Soft Hierarchy**: Total marks is an invariant hard constraint ($\sum m_i = M$). Difficulty, topic, and type distributions are soft targets minimized via a quadratic loss function:
-  $$\mathcal{L}(S) = w_d \sum (A_d - T_d)^2 + w_t \sum (A_t - T_t)^2 + w_y \sum (A_y - T_y)^2$$
-- **Automatic Multi-Objective Relaxation**: When a constraint cannot be met due to bank depth or integer indivisibility, the solver finds the Pareto-optimal alternative that keeps total marks exact while minimizing the Euclidean distance to requested percentages.
-- **Zero Silent Substitutions (Audit Trail)**: The engine detects every dimension where achieved percentage deviates from requested percentage by $\ge 4\%$. It classifies the relaxation by severity (`notice`, `moderate`, `significant`), explains the root cause (e.g., discrete question marks, bank depletion), and logs the exact compensatory remedy in a high-visibility, persistent **Oxblood Audit Banner** situated immediately above the examination sheet.
+To give teachers maximum flexibility, PaperForge supports two complementary generation engines:
+- **Fast Solver (Default)**: Combines a curated question bank with a dynamic parameterized question generator using subset-sum DP reachability and simulated-annealing local search.
+- **AI / LLM Mode**: Synthesizes novel questions with LaTeX formatting and custom teacher instructions when open-ended novelty is preferred.
 
 ---
 
-## Where It Falls Short
+## 2. Handling the "Constraints Don't Fit" Problem
 
-1. **Integer Indivisibility at Low Mark Denominations**: When generating short quizzes (e.g. 20 or 25 marks), questions with larger denominations (5 or 6 marks) represent 20–30% of the entire paper. Achieving a fine-grained distribution like 33% / 33% / 34% is mathematically impossible when questions are discrete whole numbers.
-2. **Fixed Bank Horizon**: The offline question bank currently contains 61 curated questions. While sufficient for generating distinct 25m, 40m, 60m, and 80m assessments, repeatedly generating full 100-mark papers will exhaust candidate variety across niche intersections (e.g., Hard Trigonometry MCQs).
-3. **Greedy-Local Search vs. Integer Linear Programming**: While the current hybrid dynamic programming + local search runs in under 15ms and consistently finds solutions within 1–2% of the optimal mark combination, it is a heuristic approximation rather than an exact Branch-and-Cut ILP solver (such as GLPK or CBC via WASM).
+Question banks are discrete and finite. If a teacher requests 35% Hard Algebra on a 40-mark paper (14 marks required), but the question pool only has 10 marks of Hard Algebra, satisfying all conditions simultaneously is mathematically impossible.
 
----
+Instead of crashing or silently substituting mismatched questions, PaperForge uses a **Relax-and-Report Strategy**:
 
-## What I'd Do With More Time
-
-- **WASM-Compiled Integer Linear Programming (CBC / HiGHS)**: Compile an exact simplex/branch-and-bound solver to WebAssembly to prove mathematical optimality for papers up to 200 marks.
-- **Form A / Form B Equivalence Generator**: Add a one-click "Generate Alternate Form" feature that generates twin papers with non-overlapping questions but identical difficulty and topic curves.
-- **LaTeX & Word (.docx) Direct Export**: Support direct export to Cambridge/CBSE standard LaTeX `.tex` templates and formatted `.docx` files with equations rendered via MathType/KaTeX.
-- **Question Ingestion Pipeline with Mark Verification**: A teacher authoring tool allowing educators to import custom JSON or CSV questions with automatic schema validation and difficulty tagging.
+- **Hard Constraint Invariant**: Total marks is strictly enforced ($\sum m_i = M$). The total will never drift or round off.
+- **Multi-Objective Loss Minimization**: Difficulty, topic, and question-type targets are treated as soft constraints minimized via quadratic loss:
+  $$\mathcal{L} = w_d \sum (A_d - T_d)^2 + w_t \sum (A_t - T_t)^2 + w_y \sum (A_y - T_y)^2$$
+- **Transparent Audit Banner**: When achieved marks deviate from requested marks by $\ge 4\%$, PaperForge highlights the exact delta, explains the root cause (e.g., discrete mark values or pool limitations), and notes the compensatory adjustments made to preserve total marks.
 
 ---
 
-## One Thing I'm Proud Of
+## 3. Targeted Question Swap (Without Redoing the Paper)
 
-**The In-Place Targeted Question Swap Mechanism with Hard-Constraint Preservation**.
-Instead of forcing a teacher to discard an entire generated paper if they dislike a single question, PaperForge lets them click "Swap" on that specific item. The server searches all remaining unassigned questions in the bank, strictly filters for items with the **exact same marks** (preserving the 40-mark invariant), and ranks them using pedagogical distance scoring (matching topic, difficulty, and format first). Swapping instantly recalculates the requested-vs-actual breakdown and relaxation audit without touching any other question on the paper.
-
----
-
-## One Thing That's Still Weak
-
-**Dynamic Auto-Balancing across Mutually Constrained Sliders**.
-While each slider group features a "Balance" button that normalizes totals to 100%, dragging one slider currently changes the sum rather than proportionally adjusting the other sliders in real-time. In a future iteration, an active proportional-spring slider interaction would prevent users from ever having non-100% states while adjusting values.
+Teachers can click the **Swap** button on any individual question:
+- The system filters candidate questions having the **exact same marks**, guaranteeing the total paper marks remain unchanged.
+- Candidates are ranked by pedagogical similarity (matching topic, difficulty, and format first).
+- Swapping recalculates the breakdown and audit warnings in real time without altering any other question on the paper.
 
 ---
 
-## Project Structure
+## 4. What's Weak & What I'd Do With More Time
 
-```
-paperforge/
-├── app/
-│   ├── api/
-│   │   ├── generate/route.ts      # Server-side constraint solver endpoint
-│   │   └── swap/route.ts          # Candidate search endpoint
-│   ├── globals.css                # Academic theme tokens & print stylesheet
-│   ├── layout.tsx                 # Google Fonts (Lora & IBM Plex Sans)
-│   └── page.tsx                   # Main workstation UI
-├── components/
-│   ├── ControlRail.tsx            # Instrument panel with sliders & sum indicators
-│   ├── ExamPaper.tsx              # Authentic examination sheet preview
-│   ├── QuestionItem.tsx           # Serif numbered questions with [X] marks
-│   ├── ConstraintWarnings.tsx     # High-visibility oxblood audit banner
-│   ├── BreakdownComparison.tsx    # Side-by-side requested vs actual meters
-│   ├── QuestionSwapModal.tsx      # Replacement question drawer
-│   └── SumCheckBadge.tsx          # Live 100% sum verification
-├── data/
-│   └── question_bank.json         # 61 realistic STEM questions
-├── lib/
-│   ├── types.ts                   # Core TypeScript interfaces
-│   ├── solver.ts                  # Deterministic DP + local search constraint solver
-│   └── swap.ts                    # In-place swap logic
-├── sample-paper.json              # 40-mark reference paper
-└── README.md
-```
+### Where It Falls Short:
+- **Integer Indivisibility at Low Mark Scales**: In short 20–25 mark quizzes, higher-value questions (5–6 marks) make up large percentages of the paper, making fine-grained percentage targets (e.g., 33%/33%/34%) approximate.
+- **Slider Proportional Coupling**: Sliders currently change individually and provide a one-click "Balance" button. Proportional spring-linked sliders would improve the UX when adjusting multi-dimensional percentages.
 
-## Running Locally
+### What I'd Do With More Time:
+1. **WASM-Compiled Integer Linear Programming (HiGHS / CBC)**: Formalize the solver into an exact branch-and-cut ILP model in WebAssembly for guaranteed mathematical optimality on large (100–200m) papers.
+2. **Parallel Form Equivalence (Form A / Form B)**: One-click generation of twin examination papers with non-overlapping questions but identical difficulty and topic curves.
+3. **LaTeX & DOCX Export**: Direct download of formatted `.tex` and `.docx` exam sheets ready for printing.
 
+---
+
+## 5. One Thing I'm Proud Of & One Thing That's Still Weak
+
+- **Proud Of**: The **in-place targeted question swap mechanism**. It keeps the 40-mark invariant intact while letting teachers customize individual questions seamlessly.
+- **Still Weak**: Dynamic multi-slider auto-balancing when dragging individual sliders without clicking "Balance".
+
+---
+
+## Quick Start
+
+### Prerequisites
+- Node.js (v18+)
+- npm
+
+### Run Locally
 ```bash
+./start.sh
+# or
 npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to access PaperForge.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+### Run Test Suite
+```bash
+npx tsx scripts/verify-all.ts
+```

@@ -9,6 +9,17 @@ export type Topic =
   | 'Physics-Mechanics'
   | 'Chemistry-Basics';
 
+export type GeneratorMode = 'solver' | 'llm' | 'hybrid';
+
+export type DifficultyPreset = 'foundational' | 'balanced' | 'advanced' | 'olympiad' | 'custom';
+
+export interface LLMConfig {
+  provider?: 'gemini' | 'openai' | 'claude' | 'built-in';
+  apiKey?: string;
+  modelName?: string;
+  promptNotes?: string;
+}
+
 export interface Question {
   id: string;
   topic: Topic;
@@ -90,6 +101,8 @@ export interface GeneratedPaper {
   breakdown: PaperBreakdown;
   warnings: ConstraintRelaxationWarning[];
   createdAt: string;
+  generatorMode?: GeneratorMode;
+  generationTimeMs?: number;
 }
 
 export interface SwapCandidateResponse {

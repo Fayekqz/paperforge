@@ -10,24 +10,33 @@ interface MathTextProps {
 }
 
 /**
- * Renders a string that may contain LaTeX math expressions.
+ * Renders a string that may contain LaTeX math expressions and physics/chemistry symbols.
  * Supports:
  *   - Display math:  $$...$$
  *   - Inline math:   $...$
- * Plain text segments are rendered as-is.
+ *   - Newlines formatted cleanly with paragraph breaks
  */
 export default function MathText({ text, className = '' }: MathTextProps) {
   if (!text) return null;
 
-  // Split on $$...$$ first (display math), then $...$ (inline math)
-  // We use a two-pass approach to avoid greedy $ collisions.
   const segments = parseSegments(text);
 
   return (
     <span className={className}>
       {segments.map((seg, i) => {
         if (seg.type === 'text') {
-          return <span key={i}>{seg.content}</span>;
+          // Render newlines in plain text
+          const lines = seg.content.split('\n');
+          return (
+            <span key={i}>
+              {lines.map((line, lineIdx) => (
+                <React.Fragment key={lineIdx}>
+                  {line}
+                  {lineIdx < lines.length - 1 && <br />}
+                </React.Fragment>
+              ))}
+            </span>
+          );
         }
 
         try {
@@ -35,18 +44,19 @@ export default function MathText({ text, className = '' }: MathTextProps) {
             displayMode: seg.type === 'display',
             throwOnError: false,
             strict: false,
+            trust: true,
           });
           return (
             <span
               key={i}
-              className={seg.type === 'display' ? 'block my-2' : 'inline-math'}
+              className={seg.type === 'display' ? 'block my-2 overflow-x-auto text-center' : 'inline-math'}
               dangerouslySetInnerHTML={{ __html: html }}
             />
           );
         } catch {
           // Fallback: render raw if KaTeX fails
           return (
-            <span key={i} className="font-mono text-sm text-[#80182A]">
+            <span key={i} className="font-mono text-xs text-[#80182A]">
               {seg.content}
             </span>
           );

@@ -30,6 +30,19 @@
   --font-paper: var(--font-paper-serif);
 }
 
+/* Hide Next.js dev watermark/badge/portal */
+nextjs-portal,
+#__next-build-watcher,
+div[data-nextjs-dev-overlay],
+div[data-nextjs-toast],
+[data-nextjs-dev-tools-button],
+[data-nextjs-dialog-overlay] {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+}
+
 /* Custom scrollbars for control rail */
 ::-webkit-scrollbar {
   width: 6px;

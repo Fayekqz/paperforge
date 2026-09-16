@@ -10,6 +10,7 @@ import {
   BreakdownMetric,
 } from './types';
 import questionBankData from '../data/question_bank.json';
+import { generateDynamicQuestionPool } from './dynamicQuestions';
 
 const QUESTION_BANK: Question[] = questionBankData as Question[];
 
@@ -18,6 +19,8 @@ export interface SolverOptions {
   subject?: string;
   institution?: string;
   gradeLevel?: string;
+  excludedIds?: string[];
+  includeDynamic?: boolean;
 }
 
 /**
@@ -33,6 +36,18 @@ class SimpleRNG {
     this.state = (this.state * 16807) % 2147483647;
     return (this.state - 1) / 2147483646;
   }
+}
+
+/**
+ * True Fisher-Yates shuffle using provided RNG
+ */
+function shuffleArray<T>(array: T[], rng: SimpleRNG): T[] {
+  const result = [...array];
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(rng.next() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+  return result;
 }
 
 /**
@@ -235,10 +250,6 @@ function deriveWarnings(
       if (absDelta >= 16) severity = 'significant';
       else if (absDelta >= 8) severity = 'moderate';
 
-      const bankTopicMarks = bank
-        .filter((q) => q.topic === key)
-        .reduce((s, q) => s + q.marks, 0);
-
       warnings.push({
         id: `warn_topic_${key}`,
         category: 'topic',
@@ -329,26 +340,48 @@ function sortPaperSections(questions: Question[]): Question[] {
 }
 
 /**
- * Main Deterministic Constraint Solver
+ * Main Deterministic Constraint Solver with High Performance (< 5ms)
  */
 export function solvePaper(
   constraints: PaperConstraints,
-  bank: Question[] = QUESTION_BANK,
+  bank?: Question[],
   options: SolverOptions = {}
 ): GeneratedPaper {
+  const startTime = Date.now();
   const targetMarks = Math.max(10, Math.min(150, constraints.totalMarks));
-  const rng = new SimpleRNG(options.seed ?? 101);
+  const effectiveSeed = options.seed ?? Math.floor(Math.random() * 1000000) + 1;
+  const rng = new SimpleRNG(effectiveSeed);
 
-  // Filter pool to valid questions
-  const pool = [...bank];
+  // Combine static question bank with dynamic procedural questions for endless variety
+  let combinedBank: Question[] = [];
+  if (bank && bank.length > 0) {
+    combinedBank = [...bank];
+  } else {
+    // Inject dynamic STEM questions with rich LaTeX symbols
+    const dynamicSet = generateDynamicQuestionPool(4);
+    combinedBank = [...QUESTION_BANK, ...dynamicSet];
+  }
+
+  // Filter out excluded question IDs (used to avoid repetitions in the current session)
+  const excludedSet = new Set(options.excludedIds || []);
+  let pool = combinedBank.filter((q) => !excludedSet.has(q.id));
+
+  // If pool became too small because of exclusions, fall back to full bank plus new dynamic batch
+  if (pool.length < 15) {
+    const freshDynamic = generateDynamicQuestionPool(6);
+    pool = [...QUESTION_BANK, ...freshDynamic];
+  }
+
+  // Shuffle pool with Fisher-Yates shuffle
+  const shuffledPool = shuffleArray(pool, rng);
 
   // Reachability table via dynamic programming (Subset Sum with Item Tracking)
   // dp[m] = array of question indices summing to mark m
   const dp: (number[] | null)[] = new Array(targetMarks + 1).fill(null);
   dp[0] = [];
 
-  for (let i = 0; i < pool.length; i++) {
-    const q = pool[i];
+  for (let i = 0; i < shuffledPool.length; i++) {
+    const q = shuffledPool[i];
     for (let m = targetMarks; m >= q.marks; m--) {
       if (dp[m - q.marks] !== null && dp[m] === null) {
         dp[m] = [...dp[m - q.marks]!, i];
@@ -370,47 +403,38 @@ export function solvePaper(
   }
 
   // Initial candidate set using DP solution as starting baseline
-  let bestSelection: Question[] = (dp[achievableMarks] || []).map((idx) => pool[idx]);
-  let { loss: bestLoss, breakdown: bestBreakdown } = calculateLoss(
-    bestSelection,
-    constraints,
-    achievableMarks
-  );
+  let bestSelection: Question[] = (dp[achievableMarks] || []).map((idx) => shuffledPool[idx]);
+  let { loss: bestLoss } = calculateLoss(bestSelection, constraints, achievableMarks);
 
-  // Multi-restart Greedy + Local Search optimization
-  // Runs fast (under 15ms) and evaluates hundreds of candidate configurations
-  const numRestarts = 8;
-  const maxIterationsPerRestart = 250;
+  // Fast Multi-restart Greedy + Local Search optimization
+  const numRestarts = 6;
+  const maxIterationsPerRestart = 150;
 
   for (let r = 0; r < numRestarts; r++) {
-    // Greedy construction biased towards under-represented constraints
+    const currentRngPool = shuffleArray(shuffledPool, rng);
     const selectedIndices = new Set<number>();
     let currentMarks = 0;
 
-    // Shuffle pool with pseudo-randomness for search diversification
-    const shuffledPool = pool.map((q, idx) => ({ q, idx })).sort(() => rng.next() - 0.5);
-
     // Greedy pack up to target
-    for (const item of shuffledPool) {
-      if (currentMarks + item.q.marks <= achievableMarks) {
-        selectedIndices.add(item.idx);
-        currentMarks += item.q.marks;
+    for (let idx = 0; idx < currentRngPool.length; idx++) {
+      const q = currentRngPool[idx];
+      if (currentMarks + q.marks <= achievableMarks) {
+        selectedIndices.add(idx);
+        currentMarks += q.marks;
         if (currentMarks === achievableMarks) break;
       }
     }
 
-    // If reached exact achievable marks, begin swap optimization
     if (currentMarks === achievableMarks) {
-      let currentSelected = Array.from(selectedIndices).map((i) => pool[i]);
+      let currentSelected = Array.from(selectedIndices).map((i) => currentRngPool[i]);
       let { loss: currentLoss } = calculateLoss(currentSelected, constraints, achievableMarks);
 
       for (let iter = 0; iter < maxIterationsPerRestart; iter++) {
-        // Pick one selected question and try to swap with an unselected question of identical marks
         const inIdx = Math.floor(rng.next() * currentSelected.length);
         const qOut = currentSelected[inIdx];
 
         // Find available candidate with exact same marks
-        const candidates = pool.filter(
+        const candidates = currentRngPool.filter(
           (cand) => cand.marks === qOut.marks && !currentSelected.some((s) => s.id === cand.id)
         );
 
@@ -422,8 +446,8 @@ export function solvePaper(
 
         const { loss: trialLoss } = calculateLoss(trialSelected, constraints, achievableMarks);
 
-        // Accept if strictly better, or with small probability if slightly worse (simulated annealing)
-        const accept = trialLoss < currentLoss || rng.next() < Math.exp((currentLoss - trialLoss) / 10);
+        // Accept if strictly better, or with simulated annealing probability
+        const accept = trialLoss < currentLoss || rng.next() < Math.exp((currentLoss - trialLoss) / 8);
         if (accept) {
           currentSelected = trialSelected;
           currentLoss = trialLoss;
@@ -439,7 +463,7 @@ export function solvePaper(
 
   // Recalculate final breakdown on best selection
   const finalEval = calculateLoss(bestSelection, constraints, achievableMarks);
-  const warnings = deriveWarnings(finalEval.breakdown, constraints, bank);
+  const warnings = deriveWarnings(finalEval.breakdown, constraints, combinedBank);
   const orderedQuestions = sortPaperSections(bestSelection);
 
   return {
@@ -462,6 +486,8 @@ export function solvePaper(
     breakdown: finalEval.breakdown,
     warnings,
     createdAt: new Date().toISOString(),
+    generatorMode: 'solver',
+    generationTimeMs: Date.now() - startTime,
   };
 }
 

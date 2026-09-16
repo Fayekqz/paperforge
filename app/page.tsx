@@ -1,12 +1,15 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 import {
   GeneratedPaper,
   PaperConstraints,
   Question,
-  ConstraintRelaxationWarning,
+  GeneratorMode,
+  LLMConfig,
 } from '@/lib/types';
+import { getCurrentUser, signOut, User } from '@/lib/auth';
 import ControlRail from '@/components/ControlRail';
 import ExamPaper from '@/components/ExamPaper';
 import ConstraintWarnings from '@/components/ConstraintWarnings';
@@ -14,7 +17,17 @@ import BreakdownComparison from '@/components/BreakdownComparison';
 import QuestionSwapModal from '@/components/QuestionSwapModal';
 import { CandidateWithMatchScore } from '@/lib/swap';
 import { recalculatePaperBreakdown } from '@/lib/solver';
-import { FileText, ShieldCheck, Scale, Compass, CheckCircle2, RotateCw, AlertCircle } from 'lucide-react';
+import {
+  FileText,
+  RotateCw,
+  AlertCircle,
+  Zap,
+  Sparkles,
+  RefreshCw,
+  User as UserIcon,
+  LogOut,
+  LogIn,
+} from 'lucide-react';
 
 const DEFAULT_CONSTRAINTS: PaperConstraints = {
   totalMarks: 40,
@@ -43,12 +56,30 @@ export default function PaperForgeApp() {
   const [isLoading, setIsLoading] = useState(false);
   const [apiError, setApiError] = useState<string | null>(null);
 
+  // User Auth State
+  const [user, setUser] = useState<User | null>(null);
+
+  // Generation Mode & AI Settings
+  const [generatorMode, setGeneratorMode] = useState<GeneratorMode>('solver');
+  const [llmConfig, setLlmConfig] = useState<LLMConfig>({ provider: 'built-in' });
+  const [preventRepetition, setPreventRepetition] = useState<boolean>(true);
+  const [usedQuestionIds, setUsedQuestionIds] = useState<string[]>([]);
+
   // Swap modal state
   const [isSwapModalOpen, setIsSwapModalOpen] = useState(false);
   const [swapTargetQuestion, setSwapTargetQuestion] = useState<Question | null>(null);
   const [swapCandidates, setSwapCandidates] = useState<CandidateWithMatchScore[]>([]);
 
-  // Generation function calling the server-side solver API route
+  useEffect(() => {
+    setUser(getCurrentUser());
+  }, []);
+
+  const handleSignOut = () => {
+    signOut();
+    setUser(null);
+  };
+
+  // Generation function calling the server-side solver / LLM API route
   const generatePaper = async (customConstraints?: PaperConstraints) => {
     setIsLoading(true);
     setApiError(null);
@@ -59,9 +90,12 @@ export default function PaperForgeApp() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           constraints: payloadConstraints,
+          mode: generatorMode,
+          llmConfig,
+          excludedIds: preventRepetition ? usedQuestionIds : [],
           options: {
             subject: 'Mathematics & Physical Sciences',
-            institution: 'St. Jude Collegiate Academy & Examinations Syndicate',
+            institution: user?.institution || 'St. Jude Collegiate Academy & Examinations Syndicate',
             gradeLevel: 'Upper Secondary Standard Assessment',
           },
         }),
@@ -73,7 +107,17 @@ export default function PaperForgeApp() {
       }
 
       const data = await res.json();
-      setPaper(data.paper);
+      const newPaper: GeneratedPaper = data.paper;
+      setPaper(newPaper);
+
+      // Track newly generated questions to prevent repetition in subsequent clicks
+      if (newPaper && newPaper.questions) {
+        const newIds = newPaper.questions.map((q) => q.id);
+        setUsedQuestionIds((prev) => {
+          const combined = Array.from(new Set([...prev, ...newIds]));
+          return combined.slice(-120);
+        });
+      }
     } catch (err: any) {
       console.error('Failed to generate paper:', err);
       setApiError(err.message || 'An error occurred while generating the examination paper.');
@@ -138,10 +182,14 @@ export default function PaperForgeApp() {
     setSwapTargetQuestion(null);
   };
 
+  const clearSessionHistory = () => {
+    setUsedQuestionIds([]);
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-[#F3F0E9] text-[#181716] font-chrome">
       {/* Top Academic Masthead */}
-      <header className="no-print bg-[#FFFFFF] border-b border-[#DDD8CD] px-4 sm:px-6 py-3 flex items-center justify-between shadow-2xs z-10">
+      <header className="no-print bg-[#FFFFFF] border-b border-[#DDD8CD] px-4 sm:px-6 py-2.5 flex items-center justify-between shadow-2xs z-10 flex-wrap gap-2">
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 rounded bg-[#80182A] text-white flex items-center justify-center font-serif font-bold text-base shadow-xs">
             PF
@@ -154,17 +202,74 @@ export default function PaperForgeApp() {
               </span>
             </div>
             <p className="text-xs text-[#6B655D] hidden sm:block">
-              Deterministic Examination Generator with Multi-Objective Constraint Auditing
+              Dynamic STEM Examination Generator with LaTeX & Constraint Auditing
             </p>
           </div>
         </div>
 
-        {/* Masthead Status Info */}
-        <div className="flex items-center gap-3 text-xs text-[#524E48]">
-          <div className="hidden md:flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#F8F6F1] border border-[#E0DBCF] font-mono text-[11px]">
-            <ShieldCheck className="w-3.5 h-3.5 text-[#1E5631]" />
-            <span>Bank: 61 Curated Questions</span>
-          </div>
+        {/* Masthead Status Info & User Auth Profile */}
+        <div className="flex items-center gap-2.5 text-xs text-[#524E48]">
+          {/* Generation Engine & Latency Badge */}
+          {paper && (
+            <div className="hidden sm:flex items-center gap-2">
+              <div className="flex items-center gap-1 px-2.5 py-1 rounded bg-[#F8F6F1] border border-[#E0DBCF] font-mono text-[11px]">
+                {paper.generatorMode === 'llm' ? (
+                  <>
+                    <Sparkles className="w-3.5 h-3.5 text-[#80182A]" />
+                    <span className="font-semibold text-[#80182A]">AI Mode</span>
+                  </>
+                ) : (
+                  <>
+                    <Zap className="w-3.5 h-3.5 text-[#1E5631]" />
+                    <span className="font-semibold text-[#1E5631]">Fast Solver</span>
+                  </>
+                )}
+                {paper.generationTimeMs !== undefined && (
+                  <span className="text-[#7A7368] ml-1">({paper.generationTimeMs}ms)</span>
+                )}
+              </div>
+
+              {usedQuestionIds.length > 0 && preventRepetition && (
+                <button
+                  type="button"
+                  onClick={clearSessionHistory}
+                  title="Click to reset unseen question cache"
+                  className="hidden md:flex items-center gap-1 px-2 py-1 rounded bg-[#FAF8F3] border border-[#DDD6C8] text-[10px] font-mono text-[#6B655D] hover:text-[#181716] cursor-pointer"
+                >
+                  <RefreshCw className="w-3 h-3 text-[#1E5631]" />
+                  <span>{usedQuestionIds.length} Unique</span>
+                </button>
+              )}
+            </div>
+          )}
+
+          {/* User Auth Profile / Login Link */}
+          {user ? (
+            <div className="flex items-center gap-2 pl-2 border-l border-[#DDD8CD]">
+              <div className="flex items-center gap-1.5 px-2 py-1 rounded bg-[#F4EFEB] border border-[#DDD6C8] text-xs font-medium text-[#181716]">
+                <div className="w-4 h-4 rounded-full bg-[#80182A] text-white flex items-center justify-center text-[9px] font-bold">
+                  {user.name.charAt(0).toUpperCase()}
+                </div>
+                <span className="truncate max-w-[120px]">{user.name}</span>
+              </div>
+              <button
+                type="button"
+                onClick={handleSignOut}
+                title="Sign Out"
+                className="p-1 rounded text-[#6B655D] hover:text-[#80182A] hover:bg-[#F2EFE8] transition-colors cursor-pointer"
+              >
+                <LogOut className="w-3.5 h-3.5" />
+              </button>
+            </div>
+          ) : (
+            <Link
+              href="/login"
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded bg-[#FAF8F3] border border-[#DDD6C8] text-[#332F2A] hover:bg-[#80182A] hover:text-white transition-all text-xs font-semibold cursor-pointer shadow-2xs"
+            >
+              <LogIn className="w-3.5 h-3.5" />
+              <span>Sign In / Register</span>
+            </Link>
+          )}
 
           <button
             type="button"
@@ -173,7 +278,7 @@ export default function PaperForgeApp() {
             className="flex items-center gap-1.5 px-3 py-1.5 rounded border border-[#DDD6C8] bg-white text-[#332F2A] hover:bg-[#F2EFE8] transition-colors cursor-pointer text-xs font-semibold shadow-2xs"
           >
             <RotateCw className={`w-3.5 h-3.5 ${isLoading ? 'animate-spin' : ''}`} />
-            <span>Solve</span>
+            <span>Generate New</span>
           </button>
         </div>
       </header>
@@ -186,6 +291,12 @@ export default function PaperForgeApp() {
           onChange={setConstraints}
           onGenerate={() => generatePaper()}
           isLoading={isLoading}
+          generatorMode={generatorMode}
+          onModeChange={setGeneratorMode}
+          llmConfig={llmConfig}
+          onLLMConfigChange={setLlmConfig}
+          preventRepetition={preventRepetition}
+          onTogglePreventRepetition={setPreventRepetition}
         />
 
         {/* Right Dominant Focal Area: Audit + Paper Sheet */}
