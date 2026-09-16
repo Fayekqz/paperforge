@@ -2,6 +2,8 @@
 
 A lightweight, deterministic question paper generator and constraint optimizer built for secondary and collegiate STEM teachers (Mathematics, Physics, Chemistry).
 
+🌐 **Live Deployed Application:** [https://paperforge-lyart.vercel.app/](https://paperforge-lyart.vercel.app/)
+
 ---
 
 ## 1. Approach & Why
@@ -62,7 +64,10 @@ Teachers can click the **Swap** button on any individual question:
 
 ---
 
-## Quick Start
+## Quick Start & Deployment
+
+### Live Production Deployment
+- **URL:** [https://paperforge-lyart.vercel.app/](https://paperforge-lyart.vercel.app/)
 
 ### Prerequisites
 - Node.js (v18+)
